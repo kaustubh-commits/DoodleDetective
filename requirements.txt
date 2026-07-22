@@ -1,0 +1,14 @@
+# Doodle Detective — Dependencies
+# -------------------------------
+# Python 3.10–3.12 recommended (TensorFlow does not yet support 3.13).
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# If you are on Linux, you may also need:
+#   sudo apt install python3-tk
+
+tensorflow>=2.10
+numpy>=1.21
+Pillow>=9.0
+matplotlib>=3.5
