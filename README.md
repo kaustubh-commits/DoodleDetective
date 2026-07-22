@@ -14,8 +14,8 @@
 
 | Drawing Canvas | Prediction Result | Confidence Chart |
 |:---:|:---:|:---:|
-| ![Blank canvas](assets/screenshots/blank_canvas.png) | ![Drawing an apple](assets/screenshots/drawing_apple.png) | ![Confidence chart](assets/screenshots/confidence_chart.png) |
-| Start with a blank 280×280 canvas | Draw an apple, cat, or star | Bar chart shows model confidence per class |
+| ![Application interface](assets/screenshots/app_interface.png) | ![Drawing an apple](assets/screenshots/drawing_apple.png) | ![Confidence chart](assets/screenshots/confidence_chart.png) |
+| Complete application interface | Draw an apple, cat, or star | Bar chart shows model confidence per class |
 
 | Full Interface | Drawing Examples |
 |:---:|:---:|
@@ -240,12 +240,6 @@ These are ideas I'd explore if I were to continue this project:
 - **Tkinter** — Python's built-in GUI toolkit
 - **Matplotlib** — Visualisation library for the confidence chart
 - **Pillow (PIL)** — Image processing library
-
----
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
