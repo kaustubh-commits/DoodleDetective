@@ -1,8 +1,26 @@
 # Doodle Detective 🎨🔍
 
-**A desktop application that classifies hand-drawn doodles using a Convolutional Neural Network.**
+[![Python](https://img.shields.io/badge/Python-3.10_|_3.11_|_3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> This is my first deep learning project — a complete end-to-end machine learning pipeline from the Google QuickDraw dataset to a working Tkinter desktop application.
+**An end-to-end deep learning project that classifies hand-drawn doodles using a Convolutional Neural Network and a desktop GUI built with Tkinter.**
+
+> This was my first deep learning project and explores the complete workflow from dataset preparation and CNN training to deploying a trained model in a desktop application.
+
+---
+
+## Screenshots
+
+| Drawing Canvas | Prediction Result | Confidence Chart |
+|:---:|:---:|:---:|
+| ![Blank canvas](assets/screenshots/blank_canvas.png) | ![Drawing an apple](assets/screenshots/drawing_apple.png) | ![Confidence chart](assets/screenshots/confidence_chart.png) |
+| Start with a blank 280×280 canvas | Draw an apple, cat, or star | Bar chart shows model confidence per class |
+
+| Full Interface | Drawing Examples |
+|:---:|:---:|
+| ![Application interface](assets/screenshots/app_interface.png) | ![Cat drawing](assets/screenshots/drawing_cat.png) ![Star drawing](assets/screenshots/drawing_star.png) |
+| The complete Doodle Detective window | The model classifies all three supported shapes |
 
 ---
 
@@ -13,6 +31,16 @@ Doodle Detective lets you draw an **apple**, **cat**, or **star** on a canvas, a
 | Input | Output |
 |-------|--------|
 | Hand-drawn sketch (280×280) | Predicted class + confidence % |
+
+## Tech Stack
+
+- **Python** — Core programming language
+- **TensorFlow / Keras** — Deep learning framework for the CNN
+- **Tkinter** — Desktop GUI toolkit (included with Python)
+- **Pillow (PIL)** — Image processing and canvas management
+- **NumPy** — Numerical array operations for preprocessing
+- **Matplotlib** — Confidence score bar chart visualisation
+- **Jupyter Notebook** — Interactive tutorial notebook
 
 ---
 
@@ -94,17 +122,22 @@ DoodleDetective/
 │   └── utils.py                      # Helper functions
 │
 ├── models/
+│   ├── README.md                     # Model details and usage
 │   └── doodle_classifier.keras       # Pre-trained CNN model
 │
 ├── notebooks/
 │   └── DoodleDetective_Workflow.ipynb  # Guided tutorial notebook
+│
+└── assets/
+    └── screenshots/                  # Application screenshots
 ```
 
 ### Why this structure?
 
 - **`src/`** — Each module has a single responsibility. The pipeline reads top-to-bottom: config → preprocess → predict → gui → visualisation.
-- **`models/`** — Standard location for trained artifacts. Keeps the root directory clean.
+- **`models/`** — Standard location for trained artifacts. Includes its own `README.md` explaining the model.
 - **`notebooks/`** — Single tutorial notebook that walks through the entire ML workflow.
+- **`assets/`** — Screenshots and other media for documentation.
 - **Root scripts** — `run_gui.py` is a minimal entry point that says "run this to start the app."
 
 ---
@@ -113,7 +146,7 @@ DoodleDetective/
 
 ### Prerequisites
 
-- Python 3.9 or later
+- Python 3.10–3.12 (TensorFlow does not yet support Python 3.13)
 - Tkinter (included with Python on macOS and Windows; on Linux: `sudo apt install python3-tk`)
 
 ### Setup
@@ -124,8 +157,11 @@ git clone https://github.com/your-username/DoodleDetective.git
 cd DoodleDetective
 
 # (Optional) Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3 -m venv .venv
+
+# Activate the environment
+source .venv/bin/activate         # macOS / Linux
+# .venv\Scripts\activate          # Windows
 
 # Install dependencies
 pip install -r requirements.txt
@@ -134,6 +170,16 @@ pip install -r requirements.txt
 ---
 
 ## Running the GUI
+
+The trained model is included in the repository, so the application works immediately after installation — no dataset downloads or retraining required.
+
+### macOS / Linux
+
+```bash
+python3 run_gui.py
+```
+
+### Windows
 
 ```bash
 python run_gui.py
@@ -170,9 +216,7 @@ The notebook covers:
 
 ## Results
 
-The model achieves strong accuracy on distinguishing between apples, cats, and stars. Specific metrics depend on the test set split, but the model reliably identifies clear drawings with high confidence.
-
-*Screenshots can be added here to demonstrate the application interface.*
+The model reliably distinguishes between apples, cats, and stars and provides confidence scores for every prediction. Example predictions can be seen in the screenshots above and the accompanying notebook.
 
 ---
 
