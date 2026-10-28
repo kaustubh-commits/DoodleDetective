@@ -6,7 +6,7 @@
 
 **An end-to-end deep learning project that classifies hand-drawn doodles using a Convolutional Neural Network and a desktop GUI built with Tkinter.**
 
-> This was my first deep learning project and explores the complete workflow from dataset preparation and CNN training to deploying a trained model in a desktop application.
+> This is my first deep learning project, built during my AI & Data Science degree at BMSCE. It explores the complete workflow from dataset preparation and CNN training to deploying a trained model in a desktop application.
 
 ---
 
@@ -31,6 +31,14 @@ Doodle Detective lets you draw an **apple**, **cat**, or **star** on a canvas, a
 | Input | Output |
 |-------|--------|
 | Hand-drawn sketch (280×280) | Predicted class + confidence % |
+
+### Dataset
+
+<p align="center">
+  <img src="assets/results/dataset_distribution.png" alt="PCA projection of the QuickDraw apple, cat and star drawings" width="700">
+</p>
+
+The model is trained on 405,543 QuickDraw bitmaps (Apple 144,722 · Cat 123,202 · Star 137,619). The plot shows the drawings projected onto their first two principal components, visualised in Tableau. The classes overlap heavily in this linear 2-D view, which is why a CNN that learns spatial features is needed rather than a simple linear classifier.
 
 ## Tech Stack
 
@@ -128,18 +136,20 @@ DoodleDetective/
 │   └── doodle_classifier.keras       # Pre-trained CNN model
 │
 ├── notebooks/
-│   └── DoodleDetective_Workflow.ipynb  # Guided tutorial notebook
+│   ├── DoodleDetective_Workflow.ipynb  # Guided tutorial notebook
+│   └── training.ipynb                  # Original training run (with outputs)
 │
 └── assets/
-    └── screenshots/                  # Application screenshots
+    ├── screenshots/                  # Application screenshots
+    └── results/                      # Confusion matrix, dataset plot
 ```
 
 ### Why this structure?
 
 - **`src/`** — Each module has a single responsibility. The pipeline reads top-to-bottom: config → preprocess → predict → gui → visualisation.
 - **`models/`** — Standard location for trained artifacts. Includes its own `README.md` explaining the model.
-- **`notebooks/`** — Single tutorial notebook that walks through the entire ML workflow.
-- **`assets/`** — Screenshots and other media for documentation.
+- **`notebooks/`** — A guided tutorial notebook, plus the original training notebook with its recorded outputs.
+- **`assets/`** — Screenshots and evaluation figures for documentation.
 - **Root scripts** — `run_gui.py` is a minimal entry point that says "run this to start the app."
 
 ---
@@ -193,6 +203,12 @@ This opens a 1000×650 window where you can draw and receive predictions.
 
 ## Notebook Walkthrough
 
+### Training run
+
+[`notebooks/training.ipynb`](notebooks/training.ipynb) is the actual notebook the shipped model was trained in, with its original outputs (dataset shapes, train/test split, per-epoch accuracy). The final model is the one defined and trained in its second training cell (Dense 64, 5 epochs); the earlier cell is a first experiment with dropout and a Dense 128 layer. To re-run it, download `full_numpy_bitmap_apple.npy`, `full_numpy_bitmap_cat.npy` and `full_numpy_bitmap_star.npy` from the [QuickDraw numpy bitmaps](https://console.cloud.google.com/storage/browser/quickdraw_dataset/full/numpy_bitmap) into the same folder as the notebook. Note that the loss/accuracy plot cell shows an error because the notebook was run out of order.
+
+### Tutorial
+
 Open the tutorial notebook to see the complete ML workflow:
 
 ```bash
@@ -218,7 +234,7 @@ The notebook covers:
 
 ## Results
 
-**Test accuracy: 98.61%** (loss 0.039) on 81,109 held-out QuickDraw drawings.
+**Test accuracy: 98.61%** (loss 0.039) on 81,109 held-out QuickDraw drawings. This matches the final epoch of the [training run](notebooks/training.ipynb) and was re-verified by reloading the saved model on the same seeded split.
 
 | Class | Precision | Recall | F1-score | Test samples |
 |-------|:---------:|:------:|:--------:|-------------:|
@@ -261,4 +277,4 @@ These are ideas I'd explore if I were to continue this project:
 
 ---
 
-*Built as a university machine learning project. Questions or feedback? Open an issue!*
+*Doodle Detective is my first deep learning project, built during my AI & Data Science degree at BMSCE. Questions or feedback? Open an issue!*
