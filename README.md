@@ -19,8 +19,8 @@
 
 | Full Interface | Drawing Examples |
 |:---:|:---:|
-| ![Application interface](assets/screenshots/app_interface.png) | ![Cat drawing](assets/screenshots/drawing_cat.png) ![Star drawing](assets/screenshots/drawing_star.png) |
-| The complete Doodle Detective window | The model classifies all three supported shapes |
+| ![Prediction detail](assets/screenshots/prediction_detail.png) | ![Cat drawing](assets/screenshots/drawing_cat.png) ![Star drawing](assets/screenshots/drawing_star.png) |
+| Prediction with confidence, fun fact and stats | The model classifies all three supported shapes |
 
 ---
 
@@ -74,16 +74,18 @@ MaxPooling2D (2×2)
       ↓
 Flatten
       ↓
-Dense (128) + ReLU
+Dense (64) + ReLU
       ↓
 Dense (3) + Softmax
       ↓
 Output: [Apple, Cat, Star]
 ```
 
-- **Training data:** ~100,000 drawings per class from QuickDraw
-- **Optimiser:** Adam
+- **Training data:** 405,543 QuickDraw drawings (Apple 144,722 · Cat 123,202 · Star 137,619)
+- **Split:** 80/20 stratified train/test (324,434 / 81,109), `random_state=42`
+- **Optimiser:** Adam, batch size 128, 5 epochs
 - **Loss:** Sparse Categorical Crossentropy
+- **Parameters:** 121,475
 - **Format:** Saved as `.keras` (Keras v3 format)
 
 ### Application Pipeline
@@ -153,7 +155,7 @@ DoodleDetective/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/DoodleDetective.git
+git clone https://github.com/kaustubh-commits/DoodleDetective.git
 cd DoodleDetective
 
 # (Optional) Create a virtual environment
@@ -216,7 +218,23 @@ The notebook covers:
 
 ## Results
 
-The model reliably distinguishes between apples, cats, and stars and provides confidence scores for every prediction. Example predictions can be seen in the screenshots above and the accompanying notebook.
+**Test accuracy: 98.61%** (loss 0.039) on 81,109 held-out QuickDraw drawings.
+
+| Class | Precision | Recall | F1-score | Test samples |
+|-------|:---------:|:------:|:--------:|-------------:|
+| Apple | 0.994 | 0.985 | 0.990 | 28,945 |
+| Cat   | 0.975 | 0.987 | 0.981 | 24,640 |
+| Star  | 0.988 | 0.987 | 0.987 | 27,524 |
+
+<p align="center">
+  <img src="assets/results/confusion_matrix.png" alt="Confusion matrix on the test set" width="520">
+</p>
+
+Most errors involve **Cat**: apples and stars are occasionally predicted as cats (~1.1% each), which shows up as Cat's lower precision. Apple and Star are rarely confused with each other.
+
+> **Note:** The test split was also passed as `validation_data` during training to monitor progress, so this figure is not from a fully untouched set. No hyperparameter tuning or early stopping was done against it.
+
+Performance on drawings made in the GUI can be lower than these numbers, because mouse-drawn strokes on a 280×280 canvas don't match the centred, scaled QuickDraw bitmaps exactly (see *Future Improvements*).
 
 ---
 

@@ -12,3 +12,7 @@ tensorflow>=2.10
 numpy>=1.21
 Pillow>=9.0
 matplotlib>=3.5
+
+# Only needed for the evaluation cells in notebooks/DoodleDetective_Workflow.ipynb
+scikit-learn>=1.0
+seaborn>=0.12

@@ -10,7 +10,7 @@ This directory contains the pre-trained Convolutional Neural Network used by the
 | **Format** | `.keras` (Keras v3) |
 | **Input** | 28 × 28 grayscale bitmap |
 | **Output** | 3-class softmax: Apple, Cat, Star |
-| **Parameters** | ~243K total |
+| **Parameters** | 121,475 total |
 | **File size** | 1.4 MB |
 
 ## Usage
