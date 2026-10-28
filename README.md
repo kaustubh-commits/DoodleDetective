@@ -205,7 +205,7 @@ This opens a 1000×650 window where you can draw and receive predictions.
 
 ### Training run
 
-[`notebooks/training.ipynb`](notebooks/training.ipynb) is the actual notebook the shipped model was trained in, with its original outputs (dataset shapes, train/test split, per-epoch accuracy). The final model is the one defined and trained in its second training cell (Dense 64, 5 epochs); the earlier cell is a first experiment with dropout and a Dense 128 layer. To re-run it, download `full_numpy_bitmap_apple.npy`, `full_numpy_bitmap_cat.npy` and `full_numpy_bitmap_star.npy` from the [QuickDraw numpy bitmaps](https://console.cloud.google.com/storage/browser/quickdraw_dataset/full/numpy_bitmap) into the same folder as the notebook. Note that the loss/accuracy plot cell shows an error because the notebook was run out of order.
+[`notebooks/training.ipynb`](notebooks/training.ipynb) is the actual notebook the shipped model was trained in, with its original outputs (dataset shapes, train/test split, per-epoch accuracy). The final model is the one defined and trained in its second training cell (Dense 64, 5 epochs); the earlier cell is a first experiment with dropout and a Dense 128 layer. To re-run it, download `full_numpy_bitmap_apple.npy`, `full_numpy_bitmap_cat.npy` and `full_numpy_bitmap_star.npy` from the [QuickDraw numpy bitmaps](https://console.cloud.google.com/storage/browser/quickdraw_dataset/full/numpy_bitmap) into the same folder as the notebook.
 
 ### Tutorial
 
